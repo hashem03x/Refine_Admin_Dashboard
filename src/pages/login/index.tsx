@@ -1,11 +1,15 @@
-import { AuthPage } from "@refinedev/antd";
+import { AuthPage, ThemedTitleV2 } from "@refinedev/antd";
+import { authCredentials } from "../../providers";
 
-export const Login = () => {
+export const LoginPage = () => {
   return (
     <AuthPage
       type="login"
+      registerLink={false}
+      forgotPasswordLink={false}
+      title={<ThemedTitleV2 collapsed={false} text="Refine Project" />}
       formProps={{
-        initialValues: { email: "demo@refine.dev", password: "demodemo" },
+        initialValues: authCredentials,
       }}
     />
   );

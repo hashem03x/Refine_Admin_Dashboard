@@ -1,5 +1,5 @@
-import { AuthPage } from "@refinedev/antd";
+import React from "react";
 
 export const Register = () => {
-  return <AuthPage type="register" />;
+  return <div>register</div>;
 };
