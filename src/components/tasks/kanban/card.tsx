@@ -1,11 +1,9 @@
 import CustomAvatar from "@/components/CustomAvatar";
 import { Text } from "@/components/text";
-import { TextIcon } from "@/components/textIcon";
 import { User } from "@/graphql/schema.types";
 import { getDateColor } from "@/utilities";
 import {
   ClockCircleOutlined,
-  DeleteOutlined,
   EyeOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
@@ -42,26 +40,18 @@ function TaskCard({ id, title, dueDate, users }: Props) {
   const { edit } = useNavigation();
 
   const dropdownItems = useMemo(() => {
-    const dropdownItems: MenuProps["items"] = [
+    const items: MenuProps["items"] = [
       {
         label: "View Card",
         key: "1",
         icon: <EyeOutlined />,
         onClick: () => {
-          edit("tasks", id, "replace");
+          if (id) edit("tasks", id, "replace");
         },
       },
-      {
-        danger: true,
-        label: "Delete Card",
-        key: "2",
-        icon: <DeleteOutlined />,
-        onClick: () => {},
-      },
     ];
-
-    return dropdownItems;
-  }, []);
+    return items;
+  }, [edit, id]);
 
   const dueDateOptions = useMemo(() => {
     if (!dueDate) return null;
@@ -85,7 +75,7 @@ function TaskCard({ id, title, dueDate, users }: Props) {
       <Card
         size="small"
         title={<Text ellipsis={{ tooltip: { title } }}>{title}</Text>}
-        onClick={() => edit("tasks", id, "replace")}
+        onClick={() => id && edit("tasks", id, "replace")}
         extra={
           <Dropdown
             trigger={["click"]}
@@ -103,7 +93,7 @@ function TaskCard({ id, title, dueDate, users }: Props) {
               icon={<MoreOutlined style={{ transform: "rotate(90deg)" }} />}
               onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => e.stopPropagation()}
-            ></Button>
+            />
           </Dropdown>
         }
       >
@@ -115,7 +105,8 @@ function TaskCard({ id, title, dueDate, users }: Props) {
             gap: "8px",
           }}
         >
-          <TextIcon style={{ marginRight: "4px" }} />
+          {/* Replace TextIcon with the intended icon or component */}
+          {/* <TextIcon style={{ marginRight: "4px" }} /> */}
           {dueDateOptions && (
             <Tag
               icon={<ClockCircleOutlined style={{ fontSize: "12px" }} />}

@@ -15,7 +15,7 @@ function DashboardCardTotalCount({ resource, isLoading, totalCount }: Props) {
     data: totalCountVariants[resource].data,
     xField: "index",
     yField: "value",
-    xAxis: false,
+    xAxis: undefined, // disable xAxis
     yAxis: {
       tickCount: 12,
       label: {
@@ -34,19 +34,18 @@ function DashboardCardTotalCount({ resource, isLoading, totalCount }: Props) {
     line: {
       color: primaryColor,
     },
-    areaStyle: () => {
-      return {
-        fill: `l(270) 0:#fff 0.2:${secondaryColor} 1:${primaryColor}`,
-      };
-    },
+    areaStyle: () => ({
+      fill: `l(270) 0:#fff 0.2:${secondaryColor} 1:${primaryColor}`,
+    }),
     smooth: true,
     appendPadding: [1, 0, 0, 0],
     padding: 0,
     syncviewpadding: true,
     autofit: true,
     animation: false,
-    tooltip: false,
+    tooltip: undefined,
   };
+
   return (
     <Card
       style={{ height: "96px", padding: "0" }}
